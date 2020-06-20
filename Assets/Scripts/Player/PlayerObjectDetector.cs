@@ -10,6 +10,17 @@ public class PlayerObjectDetector : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Interactable Object")
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                other.GetComponent<IInteractable>().Interact();
+            }
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Interactable Object")
