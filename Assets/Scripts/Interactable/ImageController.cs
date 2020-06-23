@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class ImageController : MonoBehaviour, IInteractable
 {
+    [SerializeField]
+    private GameObject imagePrefab;
+    private Camera camera;
 
     void Start()
     {
-        
+        camera = FindObjectOfType<Camera>();
     }
 
     void Update()
@@ -16,6 +19,9 @@ public class ImageController : MonoBehaviour, IInteractable
     }
     public void Interact()
     {
-        Debug.Log("Inspect!");
+        var image = Instantiate(imagePrefab, camera.transform.position, Quaternion.identity);
+        image.transform.SetParent(camera.transform);
+        image.transform.localPosition = new Vector3(0, 0, 4);
+        image.AddComponent<InspectObject>();
     }
 }
